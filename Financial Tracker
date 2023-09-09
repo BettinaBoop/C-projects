@@ -1,0 +1,81 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Transaction
+{
+    string description;
+    double amount;
+};
+
+int main()
+{
+    vector<Transaction> transactions;
+    char choice;
+    double totalIncome = 0.0; //Initialize total income to 0.0
+    double totalExpenses = 0.0; //Initialize totalExpenses to 0.0
+
+    do
+    {
+        cout <<"Personal Finance Tracker\n";
+        cout <<"________________________\n";
+        cout <<"1. Add Income\n";
+        cout <<"2. Add Expense\n";
+        cout <<"3. View Summary\n";
+        cout <<"4. Exit\n";
+        cout <<"Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case '1':
+                Transaction income;
+                income.description = "Income";
+                cout << "Enter income amount: $";
+                cin >> income.amount;
+                transactions.push_back(income);
+                cout << "Income added successfully!\n";
+                break;
+            case '2':
+                Transaction expense;
+                expense.description = "Expense";
+                cout << "Enter expense amount: $";
+                cin >> expense.amount;
+                transactions.push_back(expense);
+                cout << "Expense added successfully!\n";
+                break;
+            case '3':
+                totalIncome = 0.0;
+                totalExpenses = 0.0;
+
+                for (const Transaction& t : transactions)
+                {
+                    if (t.description == "Income")
+                    {
+                        totalIncome += t.amount;
+                    } else if (t.description == "Expense")
+                    {
+                        totalExpenses += t.amount;
+                    }
+                }
+               double savings = totalIncome - totalExpenses;
+
+                cout << "Financial Summary\n";
+                cout << "_________________\n";
+                cout << "Total Income: $" << totalIncome << endl;
+                cout << "Total Expenses: $" << totalExpenses << endl;
+                cout << "savings: $" << savings << endl;
+                break;
+            case '4':
+                cout << "Exiting Program Now. Goodbye!\n";
+                break;
+            default:
+                cout <<"Invalid choice. Please try again!\n";
+                break;
+        }
+    
+    } while (choice != '4');
+
+    return 0;
+}
